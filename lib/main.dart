@@ -1,6 +1,17 @@
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  await Flame.bgm.loadAll(<String>[
+    'adventure.m4a',
+    'spaceship.m4a',
+    'techno.m4a',
+  ]);
+
+  runApp(MyApp());
+
+  Flame.bgm.initialize();
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -42,28 +53,34 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
               child: Text('Play Track 1'),
-              onPressed: () {},
+              onPressed: () {
+                Flame.bgm.play('techno.m4a');
+              },
             ),
             RaisedButton(
               child: Text('Play Track 2'),
-              onPressed: () {},
+              onPressed: () {
+                Flame.bgm.play('adventure.m4a');
+              },
             ),
             RaisedButton(
               child: Text('Play Track 3'),
-              onPressed: () {},
+              onPressed: () {
+                Flame.bgm.play('spaceship.m4a');
+              },
             ),
             RaisedButton(
               child: Text('Stop'),
-              onPressed: () {},
+              onPressed: () => Flame.bgm.stop(),
             ),
             SizedBox(height: 32),
             RaisedButton(
               child: Text('Pause'),
-              onPressed: () {},
+              onPressed: () => Flame.bgm.pause(),
             ),
             RaisedButton(
               child: Text('Resume'),
-              onPressed: () {},
+              onPressed: () => Flame.bgm.resume(),
             ),
           ],
         ),
